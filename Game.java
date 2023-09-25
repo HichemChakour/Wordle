@@ -49,21 +49,27 @@ public class Game {
 		return true;
 	}
 	
-	public String etatMots(String mot, String motOrigine) {
-		String etat[]= new String[mot.length()];
-		if(mot != null){
-			return "Correct";
-		}
-		if(mot == null){
-			return "Mauvaise place";
-		}
-		else {
-			return "Incorrect";
+	public void etatMots(String motIn, String motOrigine) {
+		String etat[]= new String[motIn.length()];
+		for (int i = 0; i <= motIn.length(); i++) {
+			if(motIn.charAt(i)==motOrigine.charAt(i)) {// mettre charat dans la description du commit
+				etat[i]="Vert";//Correct
+			}
+			else if(motOrigine.contains(String.valueOf(motIn.charAt(i)))){
+				etat[i]="Jaune";//Mauvaise Place
+			}
+			else {
+				etat[i]="Rouge";//Incorrect
+			}
 		}
 	}
 	
 	public int difficulteJeu() {
 		return 0;	
+	}
+	
+	public void jeu() {
+		
 	}
 
 }
