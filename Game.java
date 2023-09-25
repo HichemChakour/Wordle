@@ -15,7 +15,14 @@ public class Game {
 		Parser parser = new Parser();
 		parser.fileWords();
 		Game jeu = new Game();
-		System.out.println(jeu.selectMot(jeu.difficulteJeu()));
+		String motOrigine=jeu.selectMot(jeu.difficulteJeu());
+		System.out.println(motOrigine);
+		Scanner scanner = new Scanner(System.in);
+        System.out.print("Veuillez entrer un mot : ");
+		String motEntrer = scanner.nextLine();
+		scanner.close();
+		jeu.etatMots(motEntrer,motOrigine);
+		
 	}
 	
 	public String selectMot(int nbLettre) {////1
@@ -51,7 +58,7 @@ public class Game {
 	
 	public void etatMots(String motIn, String motOrigine) {////3
 		String etat[]= new String[motIn.length()];
-		for (int i = 0; i <= motIn.length(); i++) {
+		for (int i = 0; i < motIn.length(); i++) {
 			if(motIn.charAt(i)==motOrigine.charAt(i)) {// mettre charat dans la description du commit
 				etat[i]="Vert";//Correct
 			}
@@ -61,7 +68,9 @@ public class Game {
 			else {
 				etat[i]="Rouge";//Incorrect
 			}
+			System.out.print(etat[i]+",");
 		}
+		
 	}
 	
 	public int difficulteJeu() {///4
