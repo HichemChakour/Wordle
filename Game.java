@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Random;
+import java.util.Scanner;
 
 
 public class Game {
@@ -32,6 +33,18 @@ public class Game {
             e.printStackTrace();
         }
 		return mot;
+	}
+	
+	public Boolean verifMot(String mot, int nbLettre) {
+		Scanner scanner = new Scanner(System.in);
+        System.out.print("Veuillez entrer un mot : ");
+		String motEntrer = scanner.nextLine();
+		scanner.close();
+		if (motEntrer.length() > mot.length()){
+			return false;
+		}
+		//Trouver le moyen de faire en sorte de scanner chaque mot pour voir si il est dans l'alphabet français;
+		return true;
 	}
 
 }
