@@ -15,10 +15,10 @@ public class Game {
 		Parser parser = new Parser();
 		parser.fileWords();
 		Game jeu = new Game();
-		System.out.println(jeu.selectMot(12));
+		System.out.println(jeu.selectMot(jeu.difficulteJeu()));
 	}
 	
-	public String selectMot(int nbLettre) {
+	public String selectMot(int nbLettre) {////1
 		String filePath = nbLettre+"_Lettres.txt";
 		String mot = null;
 		String mots[]= new String[2000];
@@ -37,7 +37,7 @@ public class Game {
 		return mot;
 	}
 	
-	public Boolean verifMot(String mot, int nbLettre) {
+	public Boolean verifMot(String mot, int nbLettre) {////2
 		Scanner scanner = new Scanner(System.in);
         System.out.print("Veuillez entrer un mot : ");
 		String motEntrer = scanner.nextLine();
@@ -49,7 +49,7 @@ public class Game {
 		return true;
 	}
 	
-	public void etatMots(String motIn, String motOrigine) {
+	public void etatMots(String motIn, String motOrigine) {////3
 		String etat[]= new String[motIn.length()];
 		for (int i = 0; i <= motIn.length(); i++) {
 			if(motIn.charAt(i)==motOrigine.charAt(i)) {// mettre charat dans la description du commit
@@ -64,11 +64,29 @@ public class Game {
 		}
 	}
 	
-	public int difficulteJeu() {
-		return 0;	
+	public int difficulteJeu() {///4
+		if(NB_VICTOIRE==0) {
+			return 3;//nombre de lettres
+		}
+		else if(NB_VICTOIRE==1) {
+			return 4;
+		}
+		else if(NB_VICTOIRE==2) {
+			return 5;	
+		}
+		else if(NB_VICTOIRE==3) {
+			return 6;
+		}
+		else if(NB_VICTOIRE==4) {
+			return 7;
+		}
+		else {
+			return 8;
+		}
 	}
 	
 	public void jeu() {
+		
 		
 	}
 
