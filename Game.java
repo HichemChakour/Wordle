@@ -9,6 +9,8 @@ import java.util.Scanner;
 
 public class Game {
 
+	static int NB_VICTOIRE = 0;
+	
 	public static void main(String[] args) {
 		Parser parser = new Parser();
 		parser.fileWords();
@@ -45,6 +47,23 @@ public class Game {
 		}
 		//Trouver le moyen de faire en sorte de scanner chaque mot pour voir si il est dans l'alphabet français;
 		return true;
+	}
+	
+	public String etatMots(String mot, String motOrigine) {
+		String etat[]= new String[mot.length()];
+		if(mot != null){
+			return "Correct";
+		}
+		if(mot == null){
+			return "Mauvaise place";
+		}
+		else {
+			return "Incorrect";
+		}
+	}
+	
+	public int difficulteJeu() {
+		return 0;	
 	}
 
 }
