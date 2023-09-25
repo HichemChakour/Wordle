@@ -2,31 +2,18 @@
 
 
 
-Afficher une page au hasard [x]
 
 
 
 
-À propos du projet, ce que vous pouvez faire, où trouver les informations
 
-Liste des modifications récentes sur le wiki [r]
-Soutenez-nous
 
-Accès à l’aide
 Modèles
 
 
 
 
 
-Rechercher dans le Wiktionnaire [f]
-Nous vous encourageons à créer un compte utilisateur et vous connecter ; ce n’est cependant pas obligatoire.
-Nous vous encourageons à vous connecter ; ce n’est cependant pas obligatoire. [o]
-Nous vous encourageons à créer un compte utilisateur et vous connecter ; ce n’est cependant pas obligatoire.
-Nous vous encourageons à vous connecter ; ce n’est cependant pas obligatoire. [o]
-
-Une liste des modifications effectuées depuis cette adresse IP [y]
-La page de discussion pour les contributions depuis cette adresse IP [n]
 
 
 
@@ -66,27 +53,14 @@ La page de discussion pour les contributions depuis cette adresse IP [n]
 
 
 
-Wiktionary:List of the 1750 most frequently used French words – anglais
-Ajouter des liens interlangues
-Voir la page du projet [c]
-Discussion au sujet de cette page de contenu [t]
-
-Cette page est protégée.
-Vous pouvez toutefois en visualiser la source. [e]
-Historique des versions de cette page [h]
 
 
 
-Liste des pages liées qui pointent sur celle-ci [j]
-Liste des modifications récentes des pages appelées par celle-ci [k]
-Téléverser une image ou fichier média sur le serveur [u]
-Liste de toutes les pages spéciales [q]
-Adresse permanente de cette version de cette page
-Davantage d’informations sur cette page
 
 
 
-Version imprimable de cette page [p]
+
+
 
 classe
 angle
@@ -150,7 +124,6 @@ tapis
 tiroir
 toilette
 vitre
-w.-c.
 aller
 amener
 apporter
@@ -191,19 +164,9 @@ bas
 couché
 haut
 présent
-à côté
-à droite
-à gauche
-au milieu
-au-delà
-au-dessous
-au-dessus
 debout
 dedans
 dehors
-en bas
-en face
-en haut
 loin
 près
 tard
@@ -224,7 +187,6 @@ travail
 crayon
 stylo
 feutre
-taille-crayon
 pointe
 mine
 gomme
@@ -263,7 +225,6 @@ chose
 forme
 carré
 rond
-pâte à modeler
 tampon
 livre
 histoire
@@ -271,7 +232,6 @@ bibliothèque
 image
 album
 titre
-bande dessinée
 conte
 dictionnaire
 magazine
@@ -281,7 +241,6 @@ ligne
 mot
 enveloppe
 étiquette
-carte d’appel
 affiche
 alphabet
 appareil
@@ -543,7 +502,6 @@ intéressant
 mouillé
 sec
 transparent
-à moitié
 autant
 beaucoup
 encore
@@ -552,8 +510,6 @@ peu
 plus
 trop
 déguisement
-à l’endroit
-à l’envers
 anorak
 arc
 bagage
@@ -604,7 +560,6 @@ pantalon
 pied
 poche
 prince
-pull-over
 pyjama
 reine
 robe
@@ -779,22 +734,11 @@ trois
 troisième
 un
 vert
-au-dessus
 autour
 vite
-à côté de
-au milieu de
-au-dessous de
-au-dessus de
-autour de
 avec
-en bas de
-en haut de
-loin de
-près de
 sur
 vers
-salle de jeux
 acrobate
 arrêt
 arrière
@@ -832,7 +776,6 @@ jeu
 main
 milieu
 montagne
-mur d’escalade
 muscle
 numéro
 ongle
@@ -845,10 +788,7 @@ pied
 plongeoir
 poignet
 poing
-pont de singe
-poutre d’équilibre
 prise
-rivière des crocodiles
 roulade
 saut
 serpent
@@ -878,9 +818,6 @@ gagner
 gêner
 glisser
 grimper
-marcher à quatre pattes
-marcher sur
-se mettre debout
 monter
 pencher
 percher
@@ -906,7 +843,6 @@ immobile
 rond
 serré
 souple
-au delà
 ensemble
 ici
 jamais
@@ -921,8 +857,6 @@ bande
 bicyclette
 bille
 cadenas
-cage à écureuil
-cerf-volant
 château
 coup
 cour
@@ -1038,7 +972,6 @@ gourmand
 mauvais
 meilleur
 mince
-salade de fruits
 glaçon
 jus
 kiwi
@@ -1055,7 +988,6 @@ bassine
 cocotte
 épluchure
 légume
-pomme de terre
 rondelle
 soupe
 consommé
@@ -1077,14 +1009,12 @@ radis
 restaurant
 sole
 déjeuner
-animal domestique
 animal
 bébé
 bouche
 cage
 câlin
 caresse
-cochon d’Inde
 foin
 graine
 hamster
@@ -1143,7 +1073,6 @@ bébé
 bec
 bête
 bœuf
-botte de foin
 boue
 bouquet
 bourgeon
@@ -1187,7 +1116,6 @@ jardin
 mare
 marguerite
 miel
-morceau de pain
 mouche
 mouton
 oie
@@ -1210,10 +1138,7 @@ vache
 vétérinaire
 accompagner
 baigner
-courir après
 couver
-donner à manger
-faire boire
 fumer
 griffer
 habiter
@@ -1268,15 +1193,10 @@ danse
 déguisement
 dinosaure
 drapeau
-en argent (page inexistante)
-en or (page inexistante)
-en rang (page inexistante)
 fête
 figure
 géant
 gens
-grand-mère
-grand-père
 joie
 joue
 journal
@@ -1317,7 +1237,6 @@ fête
 Noël
 boule
 cadeau
-canne à pêche
 chance
 cube
 guirlande
@@ -1327,7 +1246,6 @@ spectacle
 surprise
 trou
 visage
-faire peur
 lever
 maquiller
 électrique
@@ -1336,14 +1254,12 @@ calendrier
 âge
 an
 année
-après-midi
 calendrier
 début
 dimanche
 été
 étoile
 fin
-heure des mamans
 heure
 hiver
 horloge
@@ -1398,12 +1314,8 @@ demain
 hier
 maintenant
 puis
-tout de suite
-en avance
-en retard
 météo
 air
-arc-en-ciel
 brouillard
 ciel
 éclair
@@ -1424,7 +1336,6 @@ tonnerre
 traîneau
 vent
 abriter
-faire beau
 geler
 mouiller
 neiger
@@ -1464,7 +1375,6 @@ dînette
 four
 fourchette
 lait
-lave-linge
 lessive
 machine
 nappe
@@ -1513,7 +1423,6 @@ dent
 dentifrice
 drap
 fauteuil
-fer à repasser
 frange
 glace
 lampe
@@ -1563,7 +1472,6 @@ cousine
 crèche
 fils
 frère
-grand-parent
 homme
 femme
 jumeau
@@ -1574,9 +1482,6 @@ mère
 papa
 parent
 père
-petit-enfant
-petit-fils
-petite-fille
 rasoir
 sœur
 agiter
@@ -1622,8 +1527,6 @@ sang
 santé
 squelette
 trousse
-aller bien
-attraper une maladie (page inexistante)
 blesser
 détester
 devoir
@@ -1729,7 +1632,6 @@ patauger
 percher
 perdre
 photographier
-pique-niquer
 pleuvoir
 poser
 poursuivre
@@ -1768,7 +1670,6 @@ cloche
 clocher
 clown
 coiffeur
-colis-route
 courrier
 croix
 église
@@ -1874,11 +1775,9 @@ panier
 pâte
 pêche
 persil
-petit pois
 poire
 poireau
 pomme
-pomme de terre
 prix
 prune
 queue
@@ -1921,11 +1820,9 @@ voile
 noyer
 ramer
 nager
-Wiktionnaire:Liste des mots français que tous les Wiktionnaires devraient avoir
 
 
 
-Droit d’auteur de certaines icônes
 
 
 
