@@ -68,7 +68,7 @@ public class Game {
 	
 	public int difficulteJeu() {
 		if(NB_VICTOIRE==0) {
-			return 3;//nimber of letter
+			return 3;//number of letter
 		}
 		else if(NB_VICTOIRE==1) {
 			return 4;
@@ -88,32 +88,48 @@ public class Game {
 	}
 	
 	public void jeu() {
-		boolean win=true;
-		String motOrigine=this.selectMot(this.difficulteJeu());
 		Scanner scanner = new Scanner(System.in);
-		for (int i = 0; i < 6; i++) {//6 try to win the game
-			System.out.println(motOrigine);//This part serves to enter a word
-	        System.out.print("Veuillez entrer un mot : ");
-			String motEntrer = scanner.nextLine();
+		boolean win=true;
+		boolean game=true;
+		while (game==true){
+			String motOrigine=this.selectMot(this.difficulteJeu());
 			
-			
-			String etat[]=this.etatMots(motEntrer,motOrigine);
-			for (int j = 0; j < motEntrer.length(); j++) {//This part serves to see if the game is won
-				if(etat[j]=="Rouge" || etat[j]=="Jaune") {
-					win=false;
+			for (int i = 0; i < 6; i++) {//6 try to win the game
+				System.out.println(motOrigine);//This part serves to enter a word
+		        System.out.print("Veuillez entrer un mot : ");
+				String motEntrer = scanner.nextLine();
+				
+				
+				String etat[]=this.etatMots(motEntrer,motOrigine);
+				for (int j = 0; j < motEntrer.length(); j++) {//This part serves to see if the game is won
+					if(etat[j]=="Rouge" || etat[j]=="Jaune") {
+						win=false;
+					}
+				}
+				if(win==true) {
+					NB_VICTOIRE++;
+					System.out.println("You won ! The word was "+ motOrigine);
+					break;
 				}
 			}
-			if(win==true) {
-				NB_VICTOIRE++;
-				System.out.println("You won ! The word was "+ motOrigine);
-				break;
+			if(win==false) {
+				System.out.println("You lost... The word was "+ motOrigine);
+			}
+			while(true) {
+				System.out.print("You want to do another game ? (y or n): ");
+				String confirmation = scanner.nextLine();
+				if(confirmation.equals("y")) {
+					game=true;
+					break;
+				}
+				if(confirmation.equals("n")) {
+					game=false;
+					System.out.println("Thanks for playing !");
+					break;
+				}
 			}
 		}
-		if(win==false) {
-			System.out.println("You lost... The word was "+ motOrigine);
-		}
 		scanner.close();
-		
 	}
 
 }
