@@ -15,17 +15,10 @@ public class Game {
 		Parser parser = new Parser();
 		parser.fileWords();
 		Game jeu = new Game();
-		String motOrigine=jeu.selectMot(jeu.difficulteJeu());
-		System.out.println(motOrigine);
-		Scanner scanner = new Scanner(System.in);
-        System.out.print("Veuillez entrer un mot : ");
-		String motEntrer = scanner.nextLine();
-		scanner.close();
-		jeu.etatMots(motEntrer,motOrigine);
-		
+		jeu.jeu();
 	}
 	
-	public String selectMot(int nbLettre) {////1
+	public String selectMot(int nbLettre) {
 		String filePath = nbLettre+"_Lettres.txt";
 		String mot = null;
 		String mots[]= new String[2000];
@@ -44,7 +37,7 @@ public class Game {
 		return mot;
 	}
 	
-	public Boolean verifMot(String mot, int nbLettre) {////2
+	public Boolean verifMot(String mot, int nbLettre) {
 		Scanner scanner = new Scanner(System.in);
         System.out.print("Veuillez entrer un mot : ");
 		String motEntrer = scanner.nextLine();
@@ -56,10 +49,10 @@ public class Game {
 		return true;
 	}
 	
-	public void etatMots(String motIn, String motOrigine) {////3
+	public String[] etatMots(String motIn, String motOrigine) {
 		String etat[]= new String[motIn.length()];
 		for (int i = 0; i < motIn.length(); i++) {
-			if(motIn.charAt(i)==motOrigine.charAt(i)) {// mettre charat dans la description du commit
+			if(motIn.charAt(i)==motOrigine.charAt(i)) {
 				etat[i]="Vert";//Correct
 			}
 			else if(motOrigine.contains(String.valueOf(motIn.charAt(i)))){
@@ -68,14 +61,14 @@ public class Game {
 			else {
 				etat[i]="Rouge";//Incorrect
 			}
-			System.out.print(etat[i]+",");
+			System.out.println(etat[i]+" ");
 		}
-		
+		return etat;
 	}
 	
-	public int difficulteJeu() {///4
+	public int difficulteJeu() {
 		if(NB_VICTOIRE==0) {
-			return 3;//nombre de lettres
+			return 3;//nimber of letter
 		}
 		else if(NB_VICTOIRE==1) {
 			return 4;
@@ -95,7 +88,31 @@ public class Game {
 	}
 	
 	public void jeu() {
-		
+		boolean win=true;
+		String motOrigine=this.selectMot(this.difficulteJeu());
+		Scanner scanner = new Scanner(System.in);
+		for (int i = 0; i < 6; i++) {//6 try to win the game
+			System.out.println(motOrigine);//This part serves to enter a word
+	        System.out.print("Veuillez entrer un mot : ");
+			String motEntrer = scanner.nextLine();
+			
+			
+			String etat[]=this.etatMots(motEntrer,motOrigine);
+			for (int j = 0; j < motEntrer.length(); j++) {//This part serves to see if the game is won
+				if(etat[j]=="Rouge" || etat[j]=="Jaune") {
+					win=false;
+				}
+			}
+			if(win==true) {
+				NB_VICTOIRE++;
+				System.out.println("You won ! The word was "+ motOrigine);
+				break;
+			}
+		}
+		if(win==false) {
+			System.out.println("You lost... The word was "+ motOrigine);
+		}
+		scanner.close();
 		
 	}
 
