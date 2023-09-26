@@ -14,12 +14,14 @@ public class Game {
 	public static void main(String[] args) {
 		Parser parser = new Parser();
 		parser.fileWords();
+		parser.dico();
 		Game jeu = new Game();
 		jeu.jeu();
 	}
 	
 	public String selectMot(int nbLettre) {
-		String filePath = nbLettre+"_Lettres.txt";
+		String dossier = "Lettres_files/";
+		String filePath = dossier + nbLettre+"_Lettres.txt";
 		String mot = null;
 		String mots[]= new String[2000];
 		Random random = new Random();
@@ -37,16 +39,22 @@ public class Game {
 		return mot;
 	}
 	
-	public Boolean verifMot(String mot, int nbLettre) {
-		Scanner scanner = new Scanner(System.in);
-        System.out.print("Veuillez entrer un mot : ");
-		String motEntrer = scanner.nextLine();
-		scanner.close();
-		if (motEntrer.length() > mot.length()){
+	public Boolean verifMot(String mot,String motOrigine) {//Trouver le moyen de simplifier les mots avec accent
+		if (mot.length() > motOrigine.length() || mot.length() < motOrigine.length() ){
 			return false;
 		}
-		//Trouver le moyen de faire en sorte de scanner chaque mot pour voir si il est dans l'alphabet français;
-		return true;
+		String filePath = "dico_files/"+motOrigine.length()+"_Lettres.txt";
+		try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+			String line;
+	        while ((line = reader.readLine()) != null) {
+	            if (line.equals(mot)) {
+	                return true;
+	            }
+	        }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+		return false;
 	}
 	
 	public String[] etatMots(String motIn, String motOrigine) {
@@ -98,7 +106,10 @@ public class Game {
 				System.out.println(motOrigine);//This part serves to enter a word
 		        System.out.print("Veuillez entrer un mot : ");
 				String motEntrer = scanner.nextLine();
-				
+				while (this.verifMot(motEntrer, motOrigine)==false) {
+					 System.out.print("Ce mot n'est pas dans la liste, veuillez entrer un mot : ");
+					 motEntrer = scanner.nextLine();
+				}
 				
 				String etat[]=this.etatMots(motEntrer,motOrigine);
 				for (int j = 0; j < motEntrer.length(); j++) {//This part serves to see if the game is won
