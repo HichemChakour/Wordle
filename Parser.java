@@ -34,7 +34,8 @@ public class Parser {
 	            }
 
 	            for (int i = 2; i <= 12; i++) {
-	                String nomFichier =  i + "_Lettres.txt";
+	            	String dossier = "Lettres_files/";
+	                String nomFichier = dossier + i + "_Lettres.txt";
 	                FileWriter writer = new FileWriter(nomFichier);
 
 	                for (String mot : mots) {
@@ -51,7 +52,8 @@ public class Parser {
 	            e.printStackTrace();
 	        }
 	}
-	public void dico() {
+	public void dico() {//optimiser, mots compromis
+		String dossier = "dico_files/";
 		for (int code = 97; code <= 122; code++) {
 			String url ="https://usito.usherbrooke.ca/index/mots/tous/"+(char)code+"#"+(char)code;
 			System.out.println(url);
@@ -72,7 +74,7 @@ public class Parser {
 		         }
 		
 		        for (int i = 2; i <= 12; i++) {
-		             String nomFichier =  i + "_"+(char)code+"_Lettres.txt";
+		             String nomFichier = dossier + i +"_Lettres.txt";
 		             FileWriter writer = new FileWriter(nomFichier,true);
 		
 		             for (String mot : mots) {
