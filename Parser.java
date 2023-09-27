@@ -15,20 +15,42 @@ public class Parser {
 		dico.dico();
 	}
 	
-	
 	public void fileWords() {
 		String url ="https://fr.wiktionary.org/wiki/Wiktionnaire:Liste_de_1750_mots_fran%C3%A7ais_les_plus_courants";
 			try {
 	            Document recup = Jsoup.connect(url).get();
 	            Elements tags = recup.select("a");
-	            String[] mots = new String[tags.size()];
+	            String[] mots = new String[tags.size()]; 
 	            int index = 0;
 	            for (Element tag : tags) {
 	                if (!tag.select("*").isEmpty()) {
-	                	//System.out.println("test");
 		                String mot = tag.attr("title");
 		                if (mot != null && !mot.contains(" ") && !mot.contains("-")) {
-		                    mots[index++] = mot;
+		                    if (mot.contains("à") || mot.contains("á") || mot.contains("â") || mot.contains("ä")) {
+		                        mot = mot.replace("à", "a").replace("á", "a").replace("â", "a").replace("ä", "a");
+		                    }
+		                    if (mot.contains("é") || mot.contains("è") || mot.contains("ê") || mot.contains("ë")) {
+		                        mot = mot.replace("é", "e").replace("è", "e").replace("ê", "e").replace("ë", "e");
+		                    }
+		                    if (mot.contains("î") || mot.contains("ï")) {
+		                        mot = mot.replace("î", "i").replace("ï", "i");
+		                    }
+		                    if (mot.contains("ô") || mot.contains("ö")) {
+		                        mot = mot.replace("ô", "o").replace("ö", "o");
+		                    }
+		                    if (mot.contains("û") || mot.contains("ù") || mot.contains("ü")) {
+		                        mot = mot.replace("û", "u").replace("ù", "u").replace("ü", "u");
+		                    }
+		                    if (mot.contains("ç")) {
+		                        mot = mot.replace("ç", "c");
+		                    }
+		                    if (mot.contains("œ")) {
+		                        mot = mot.replace("œ", "oe");
+		                    }
+		                    if (mot.contains("æ")) {
+		                        mot = mot.replace("æ", "ae");
+		                    }
+		                    mots[index++] = mot.toUpperCase();
 		                }
 	                }
 	            }
@@ -36,7 +58,7 @@ public class Parser {
 	            for (int i = 2; i <= 12; i++) {
 	            	String dossier = "Lettres_files/";
 	                String nomFichier = dossier + i + "_Lettres.txt";
-	                FileWriter writer = new FileWriter(nomFichier);
+	                FileWriter writer = new FileWriter(nomFichier,true);
 
 	                for (String mot : mots) {
 	                    if (mot != null && mot.length() == i) {
@@ -52,7 +74,7 @@ public class Parser {
 	            e.printStackTrace();
 	        }
 	}
-	public void dico() {//optimiser, mots compromis
+	public void dico() {
 		String dossier = "dico_files/";
 		for (int code = 97; code <= 122; code++) {
 			String url ="https://usito.usherbrooke.ca/index/mots/tous/"+(char)code+"#"+(char)code;
@@ -64,11 +86,33 @@ public class Parser {
 		        int index = 0;
 		        for (Element tag : tags) {
 		             if (!tag.select("*").isEmpty()) {
-		             	//System.out.println("test");
 			                String mot = tag.text();
-			                //System.out.println(mot);
 			                if (mot != null && !mot.contains(" ") && !mot.contains("-")) {
-			                    mots[index++] = mot;
+			                	 if (mot.contains("à") || mot.contains("á") || mot.contains("â") || mot.contains("ä")) {
+				                        mot = mot.replace("à", "a").replace("á", "a").replace("â", "a").replace("ä", "a");
+			                    }
+			                    if (mot.contains("é") || mot.contains("è") || mot.contains("ê") || mot.contains("ë")) {
+			                        mot = mot.replace("é", "e").replace("è", "e").replace("ê", "e").replace("ë", "e");
+			                    }
+			                    if (mot.contains("î") || mot.contains("ï")) {
+			                        mot = mot.replace("î", "i").replace("ï", "i");
+			                    }
+			                    if (mot.contains("ô") || mot.contains("ö")) {
+			                        mot = mot.replace("ô", "o").replace("ö", "o");
+			                    }
+			                    if (mot.contains("û") || mot.contains("ù") || mot.contains("ü")) {
+			                        mot = mot.replace("û", "u").replace("ù", "u").replace("ü", "u");
+			                    }
+			                    if (mot.contains("ç")) {
+			                        mot = mot.replace("ç", "c");
+			                    }
+			                    if (mot.contains("œ")) {
+			                        mot = mot.replace("œ", "oe");
+			                    }
+			                    if (mot.contains("æ")) {
+			                        mot = mot.replace("æ", "ae");
+			                    }
+			                    mots[index++] = mot.toUpperCase();
 			                }
 		             }
 		         }
