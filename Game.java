@@ -39,7 +39,7 @@ public class Game {
 		return mot;
 	}
 	
-	public Boolean verifMot(String mot,String motOrigine) {//Trouver le moyen de simplifier les mots avec accent
+	public Boolean verifMot(String mot,String motOrigine) {
 		if (mot.length() > motOrigine.length() || mot.length() < motOrigine.length() ){
 			return false;
 		}
@@ -64,7 +64,7 @@ public class Game {
 				etat[i]="Vert";//Correct
 			}
 			else if(motOrigine.contains(String.valueOf(motIn.charAt(i)))){
-				etat[i]="Jaune";//Mauvaise Place
+				etat[i]="Jaune";//Wrong Place
 			}
 			else {
 				etat[i]="Rouge";//Incorrect
@@ -101,17 +101,19 @@ public class Game {
 		boolean game=true;
 		while (game==true){
 			String motOrigine=this.selectMot(this.difficulteJeu());
-			
+			System.out.println(motOrigine);
 			for (int i = 0; i < 6; i++) {//6 try to win the game
-				System.out.println(motOrigine);//This part serves to enter a word
-		        System.out.print("Veuillez entrer un mot : ");
+		        System.out.print("Veuillez entrer un mot : ");//This part serves to enter a word
 				String motEntrer = scanner.nextLine();
+				motEntrer = motEntrer.toUpperCase(); //To capitalize the word
 				while (this.verifMot(motEntrer, motOrigine)==false) {
 					 System.out.print("Ce mot n'est pas dans la liste, veuillez entrer un mot : ");
 					 motEntrer = scanner.nextLine();
+					 motEntrer = motEntrer.toUpperCase(); //To capitalize the word
 				}
 				
 				String etat[]=this.etatMots(motEntrer,motOrigine);
+				win=true;
 				for (int j = 0; j < motEntrer.length(); j++) {//This part serves to see if the game is won
 					if(etat[j]=="Rouge" || etat[j]=="Jaune") {
 						win=false;
@@ -119,7 +121,7 @@ public class Game {
 				}
 				if(win==true) {
 					NB_VICTOIRE++;
-					System.out.println("You won ! The word was "+ motOrigine);
+					System.out.println("You have won ! The word was "+ motOrigine);
 					break;
 				}
 			}
@@ -127,7 +129,7 @@ public class Game {
 				System.out.println("You lost... The word was "+ motOrigine);
 			}
 			while(true) {
-				System.out.print("You want to do another game ? (y or n): ");
+				System.out.print("You have want to do another game ? (y or n): ");
 				String confirmation = scanner.nextLine();
 				if(confirmation.equals("y")) {
 					game=true;
