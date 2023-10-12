@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextFormatter;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.HBox;
@@ -11,6 +12,7 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import java.util.function.UnaryOperator;
 
 public class app extends Application {
 
@@ -44,6 +46,8 @@ public class app extends Application {
                 lettre[i][j] = new TextField(); // Crée un champ de texte
                 final int row = i;
                 final int col = j;
+                
+                lettre[i][j].setTextFormatter(createUppercaseTextFormatter());
 
 
                 // Appliquer le style CSS aux champs de texte
@@ -67,6 +71,7 @@ public class app extends Application {
                             moveFocusToPreviousTextField();
                             lettre[currentRow][currentCol].setEditable(true);
                             lettre[currentRow][currentCol].getStyleClass().remove("text-field");
+                            lettre[currentRow][currentCol].setText("");
                             lettre[currentRow][currentCol].getStyleClass().add("text");
                         }
                     } else if (event.getCode().isLetterKey()) {
@@ -80,6 +85,16 @@ public class app extends Application {
                     		lettre[currentRow][currentCol].getStyleClass().remove("text-field");
                     		lettre[currentRow][currentCol].getStyleClass().add("text");
                         } 
+                    } else if(event.getCode() == javafx.scene.input.KeyCode.ENTER) {
+                    	if (currentCol == nblettre -1) {
+	                    	lettre[currentRow][currentCol].setEditable(false);
+	                		lettre[currentRow][currentCol].getStyleClass().add("text-field");
+	                		moveFocusToNextLigne();
+	                		lettre[currentRow][currentCol].setEditable(true);
+	                		lettre[currentRow][currentCol].getStyleClass().remove("text-field");
+	                		lettre[currentRow][currentCol].getStyleClass().add("text");
+                    	}
+                    	
                     }
                 });
 
@@ -103,11 +118,7 @@ public class app extends Application {
         if (currentCol < nblettre - 1) {
             // Avancez au champ de texte suivant dans la même ligne
             currentCol++;
-        } else if (currentRow < nbligne - 1) {
-            // Passez à la ligne suivante et revenez à la première colonne
-            currentRow++;
-            currentCol = 0;
-        }
+        } 
         lettre[currentRow][currentCol].requestFocus();
     }
 
@@ -115,15 +126,32 @@ public class app extends Application {
         if (currentCol > 0) {
             // Revenez au champ de texte précédent dans la même ligne
             currentCol--;
-        } else if (currentRow > 0) {
-            // Revenez à la ligne précédente et passez à la dernière colonne
-            currentRow--;
-            currentCol = nblettre - 1;
-        }
+        } 
         lettre[currentRow][currentCol].requestFocus();
+    }
+    private void moveFocusToNextLigne() {
+    	if (currentRow < nbligne - 1) {
+        // Passez à la ligne suivante et revenez à la première colonne
+        currentRow++;
+        currentCol = 0;
+    }
+    lettre[currentRow][currentCol].requestFocus();
+    	
+    }
+    
+    private TextFormatter<String> createUppercaseTextFormatter() {
+    	
+        UnaryOperator<TextFormatter.Change> filter = change -> {
+            String newText = change.getControlNewText().toUpperCase();
+            change.setText(newText);
+            return change;
+        };
+        return new TextFormatter<>(filter);
     }
 
     public static void main(String[] args) {
         launch(args);
     }
 }
+
+
