@@ -1,4 +1,4 @@
-package Game;
+package wordle;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -106,7 +106,7 @@ public class Game {
 	 * @return The difficulty level, which is the number of letters in the selected
 	 *         word.
 	 */
-	public int gameDifficulty() {
+	public static int gameDifficulty() {
 		if (GAME_WON == 0) {
 			return 3;// return the number of letter of the selected word
 		} else if (GAME_WON == 1) {
@@ -125,54 +125,6 @@ public class Game {
 	/**
 	 * Runs the word guessing game.
 	 */
-	public void game() {
-		Scanner scanner = new Scanner(System.in);
-		boolean win = true;
-		boolean game = true;
-		while (game == true) {
-			String selectedWord = this.selectWord(this.gameDifficulty());
-			System.out.println(selectedWord);
-			for (int i = 0; i < 6; i++) {// six tries to win the game
-				System.out.print("Veuillez entrer un mot : ");// This part serves to enter a word
-				String inputWord = scanner.nextLine();
-				inputWord = inputWord.toUpperCase();
-				while (this.wordCheck(inputWord, selectedWord) == false) {
-					System.out.print("Ce mot n'est pas dans la liste, veuillez entrer un mot : ");
-					inputWord = scanner.nextLine();
-					inputWord = inputWord.toUpperCase();
-				}
-
-				String status[] = this.wordStatus(inputWord, selectedWord);
-				win = true;
-				for (int j = 0; j < inputWord.length(); j++) {// This part serves to see if the game is won
-					if (status[j] == "Rouge" || status[j] == "Jaune") {
-						win = false;
-					}
-				}
-				if (win == true) {
-					GAME_WON++;
-					System.out.println("Vous avez gagné ! Le mot était : " + selectedWord);
-					break;
-				}
-			}
-			if (win == false) {
-				System.out.println("Vous avez perdu... Le mot était : " + selectedWord);
-			}
-			while (true) {
-				System.out.print("Vous avez envie de faire une autre partie ? (y or n) : ");
-				String confirm = scanner.nextLine();
-				if (confirm.equals("y")) {
-					game = true;
-					break;
-				}
-				if (confirm.equals("n")) {
-					game = false;
-					System.out.println("Merci d'avoir joué !");
-					break;
-				}
-			}
-		}
-		scanner.close();
-	}
+	
 
 }
