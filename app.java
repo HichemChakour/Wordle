@@ -13,14 +13,18 @@ import javafx.stage.Stage;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import java.util.function.UnaryOperator;
+import javafx.scene.control.Button;
 
 public class app extends Application {
 
     private int currentRow = 0; // Pour suivre la ligne actuelle
     private int currentCol = 0; // Pour suivre la colonne actuelle
     private final int nbligne = 6;
-    private final int nblettre = 5;
-    private TextField[][] lettre = new TextField[nbligne][nblettre];
+    private final int nblettre = Game.gameDifficulty();
+    public TextField[][] lettre = new TextField[nbligne][nblettre];
+    Game jeu=new Game();
+	String selectedWord = jeu.selectWord(nblettre); 
+	
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -87,12 +91,7 @@ public class app extends Application {
                         } 
                     } else if(event.getCode() == javafx.scene.input.KeyCode.ENTER) {
                     	if (currentCol == nblettre -1) {
-	                    	lettre[currentRow][currentCol].setEditable(false);
-	                		lettre[currentRow][currentCol].getStyleClass().add("text-field");
-	                		moveFocusToNextLigne();
-	                		lettre[currentRow][currentCol].setEditable(true);
-	                		lettre[currentRow][currentCol].getStyleClass().remove("text-field");
-	                		lettre[currentRow][currentCol].getStyleClass().add("text");
+	                		game();
                     	}
                     	
                     }
@@ -102,16 +101,26 @@ public class app extends Application {
             }
             box.getChildren().add(ligne[i]); // Ajoute la ligne à la boîte
         }
+        
+        VBox keyboard = createVirtualKeyboard();
 
         Image fond = new Image("file:FOND.jpg");
         ImageView fondView = new ImageView(fond);
         fondView.fitWidthProperty().bind(primaryStage.widthProperty());
         fondView.fitHeightProperty().bind(primaryStage.heightProperty());
-        root.getChildren().addAll( box);
+        root.getChildren().addAll( box, keyboard);
 
         primaryStage.setScene(scene); // Afficher la scène
         primaryStage.show(); // Afficher la fenêtre
         primaryStage.centerOnScreen(); // Mettre la fenêtre au centre
+    }
+    
+    private String fusionText() {
+    	String mot="";
+    	for (int i=0;i<nblettre;i++) {
+    		mot=mot+""+lettre[currentRow][i].getText();
+    	}
+    	return mot;
     }
 
     private void moveFocusToNextTextField() {
@@ -148,6 +157,130 @@ public class app extends Application {
         };
         return new TextFormatter<>(filter);
     }
+    
+    //clavier numeric
+    private VBox createVirtualKeyboard() {
+        VBox keyboard = new VBox(5);
+        
+        HBox kligne1=new HBox();
+        HBox kligne2=new HBox();
+        HBox kligne3=new HBox();
+
+        String text1 = "AZERTYUIOP";
+        String text2 = "QSDFGHJKLM";
+        String text3 = "WXCVBN";
+        
+        for (int i = 0; i < text1.length(); i++) {
+        	char letter = text1.charAt(i);
+            final char finalLetter = letter; // Make it effectively final
+            Button button = new Button(String.valueOf(letter));
+            button.setOnAction(e -> {
+                // Lorsqu'un bouton du clavier est cliqué, ajoutez la lettre à la case actuelle
+                lettre[currentRow][currentCol].setText(String.valueOf(finalLetter));
+                moveFocusToNextTextField();
+            });
+            
+            kligne1.getChildren().add(button);
+        }
+        for (int i = 0; i < text2.length(); i++) {
+        	char letter = text2.charAt(i);
+            final char finalLetter = letter; // Make it effectively final
+            Button button = new Button(String.valueOf(letter));
+            button.setOnAction(e -> {
+                // Lorsqu'un bouton du clavier est cliqué, ajoutez la lettre à la case actuelle
+                lettre[currentRow][currentCol].setText(String.valueOf(finalLetter));
+                moveFocusToNextTextField();
+            });
+            kligne2.getChildren().add(button);
+            
+        }
+        for (int i = 0; i < text3.length(); i++) {
+        	char letter = text3.charAt(i);
+            final char finalLetter = letter; // Make it effectively final
+            Button button = new Button(String.valueOf(letter));
+            button.setOnAction(e -> {
+                // Lorsqu'un bouton du clavier est cliqué, ajoutez la lettre à la case actuelle
+                lettre[currentRow][currentCol].setText(String.valueOf(finalLetter));
+                moveFocusToNextTextField();
+            });
+            kligne3.getChildren().add(button);
+        }
+        keyboard.getChildren().addAll(kligne1,kligne2,kligne3);
+        return keyboard;
+    }
+    
+    
+    
+    
+    
+    public void game() {
+		System.out.println(selectedWord);
+			
+				String inputWord = fusionText();
+				if (jeu.wordCheck(inputWord, selectedWord) == true) {
+					lettre[currentRow][currentCol].setEditable(false);
+            		lettre[currentRow][currentCol].getStyleClass().add("text-field");
+				
+
+					String status[] = jeu.wordStatus(inputWord, selectedWord);
+					for(int i=0;i<nblettre;i++){
+						if(status[i]=="Rouge") {
+							lettre[currentRow][i].getStyleClass().remove("text-field");
+			                lettre[currentRow][i].getStyleClass().remove("text");
+			                lettre[currentRow][i].getStyleClass().add("text-faux");
+						}
+						if(status[i]=="Jaune") {
+							lettre[currentRow][i].getStyleClass().remove("text-field");
+			                lettre[currentRow][i].getStyleClass().remove("text");
+			                lettre[currentRow][i].getStyleClass().add("text-medium");
+						}
+						if(status[i]=="Vert") {
+							lettre[currentRow][i].getStyleClass().remove("text-field");
+			                lettre[currentRow][i].getStyleClass().remove("text");
+			                lettre[currentRow][i].getStyleClass().add("text-correct");
+						}
+					}
+					moveFocusToNextLigne();
+            		lettre[currentRow][currentCol].setEditable(true);
+            		lettre[currentRow][currentCol].getStyleClass().remove("text-field");
+            		lettre[currentRow][currentCol].getStyleClass().add("text");
+				}
+				
+				/*win = true;
+				for (int j = 0; j < inputWord.length(); j++) {// This part serves to see if the game is won
+					if (status[j] == "Rouge" || status[j] == "Jaune") {
+						win = false;
+					}
+				}
+				if (win == true) {
+					GAME_WON++;
+					System.out.println("Vous avez gagné ! Le mot était : " + selectedWord);
+					break;
+				}
+			
+			if (win == false) {
+				System.out.println("Vous avez perdu... Le mot était : " + selectedWord);
+			}
+			while (true) {
+				System.out.print("Vous avez envie de faire une autre partie ? (y or n) : ");
+				String confirm = scanner.nextLine();
+				if (confirm.equals("y")) {
+					game = true;
+					break;
+				}
+				if (confirm.equals("n")) {
+					game = false;
+					System.out.println("Merci d'avoir joué !");
+					break;
+				}
+			}*/
+		
+	}
+    
+    
+    
+    
+  
 
     public static void main(String[] args) {
         launch(args);
