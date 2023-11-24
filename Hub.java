@@ -1,4 +1,5 @@
-package com.robin.hub;
+package wordle;
+import wordle.app;
 
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -36,7 +37,6 @@ public class Hub extends Application{
 		primaryStage.setTitle("Hub Principal");
 		primaryStage.setFullScreen(true);
 		
-		Stage wordleStage = new Stage();
 		
 		BorderPane root = new BorderPane();
 		
@@ -94,7 +94,12 @@ public class Hub extends Application{
 			public void handle(ActionEvent e) {
 				System.out.println("Lancement de Wordle");
 				primaryStage.hide();
-				wordleStage.show();
+				app wordle = new app();
+				try {
+					wordle.start(new Stage());
+				} catch (Exception ex) {
+					throw new RuntimeException(ex);
+				}
 				
 			}
 		});
