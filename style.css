@@ -1,0 +1,158 @@
+/* Style pour la scène */
+.root {
+    -fx-background-color: #2B124C; /* Couleur de fond */
+}
+
+/* Style pour la boîte contenant les lettres */
+.vbox {
+    -fx-padding: 20px;
+    -fx-alignment: center;
+}
+
+/* Style pour les lignes de lettres */
+.hbox {
+    -fx-spacing: 5px;
+    -fx-alignment: center;
+}
+
+/* Style pour les champs de texte (lettres) */
+.text {
+    -fx-pref-width: 60px;
+    -fx-pref-height: 60px;
+    -fx-font-size: 20px;
+    -fx-text-alignment: center;
+    -fx-text-fill: #000000;
+    -fx-background-color: #FFFFFF; /* Couleur de fond des champs de texte */
+    -fx-background-radius: 10px;
+    -fx-border-color: #0b29d6; /* Couleur de la bordure des champs de texte */
+    -fx-border-width: 2px;
+    -fx-border-radius: 10px;
+    -fx-background-insets: 1px;
+    -fx-text-inner-color: transparent;
+    -fx-display-caret: false;
+}
+
+.text .caret {
+    -fx-stroke: white;
+    -fx-stroke-width: 4px;
+}
+
+.text-field {
+    -fx-pref-width: 60px;
+    -fx-pref-height: 60px;
+    -fx-font-size: 20px;
+    -fx-text-alignment: center;
+    -fx-text-fill: #FFFFFF;
+    -fx-background-color: #544f4f; /* Couleur de fond des champs de texte */
+    -fx-background-radius: 10px;
+    -fx-border-color: #000000; /* Couleur de la bordure des champs de texte */
+    -fx-border-width: 2px;
+    -fx-border-radius: 10px;
+    -fx-background-insets: 1px;
+}
+
+.text-correct {
+    -fx-pref-width: 60px;
+    -fx-pref-height: 60px;
+    -fx-font-size: 20px;
+    -fx-text-alignment: center;
+    -fx-text-fill: #FFFFFF;
+    -fx-background-color: #3AFA05; /* Couleur de fond des champs de texte */
+    -fx-background-radius: 10px;
+    -fx-border-color: #000000; /* Couleur de la bordure des champs de texte */
+    -fx-border-width: 2px;
+    -fx-border-radius: 10px;
+    -fx-background-insets: 1px;
+}
+
+.text-faux {
+    -fx-pref-width: 60px;
+    -fx-pref-height: 60px;
+    -fx-font-size: 20px;
+    -fx-text-alignment: center;
+    -fx-text-fill: #FFFFFF;
+    -fx-background-color: #FA0505; /* Couleur de fond des champs de texte */
+    -fx-background-radius: 10px;
+    -fx-border-color: #000000; /* Couleur de la bordure des champs de texte */
+    -fx-border-width: 2px;
+    -fx-border-radius: 10px;
+    -fx-background-insets: 1px;
+}
+
+.text-medium {
+    -fx-pref-width: 60px;
+    -fx-pref-height: 60px;
+    -fx-font-size: 20px;
+    -fx-text-alignment: center;
+    -fx-text-fill: #FFFFFF;
+    -fx-background-color: #FABD05; /* Couleur de fond des champs de texte */
+    -fx-background-radius: 10px;
+    -fx-border-color: #000000; /* Couleur de la bordure des champs de texte */
+    -fx-border-width: 2px;
+    -fx-border-radius: 10px;
+    -fx-background-insets: 1px;
+}
+
+
+/* Style pour le label "WORDLE" */
+.label {
+    -fx-font-size: 36px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #000000; /* Couleur du texte */
+}
+
+/* Style pour l'image d'arrière-plan */
+.image-view {
+    -fx-opacity: 0.5; /* Opacité de l'image d'arrière-plan */
+}
+
+/*style pour des bouton clavier numeric*/
+
+.clavier-virtuel-button {
+    -fx-min-width: 47px;
+    -fx-max-width: 47px;
+    -fx-min-height: 60px;
+    -fx-max-height: 60px;
+    -fx-background-color: #DFB6B2;
+    -fx-text-fill: #333;
+    -fx-font-size: 20px;
+    -fx-background-radius: 10px;
+    -fx-border-color: #1f314f;
+    -fx-border-width: 1px;
+    -fx-cursor: hand;
+    -fx-border-radius: 10px;
+    -fx-background-insets: 1px;
+    -fx-effect: dropshadow(three-pass-box, rgba(20, 28, 82, 0.8), 0, 0, 3, 3);
+}
+
+/* Style pour le bouton lorsque survolé */
+.clavier-virtuel-button:hover {
+    -fx-background-color: #ddd;
+}
+
+/* Style pour le bouton lorsque pressé */
+.clavier-virtuel-button:pressed {
+    -fx-background-color: #b0b0b0;
+}
+
+.btn {
+    -fx-background-color: yellow;
+    -fx-background-radius: 50; /* Pour rendre le bouton rond */
+    -fx-min-width: 40px; /* Ajustez selon vos besoins */
+    -fx-min-height: 40px; /* Ajustez selon vos besoins */
+    -fx-max-width: 40px; /* Ajustez selon vos besoins */
+    -fx-max-height: 40px; /* Ajustez selon vos besoins */
+}
+
+/* Style pour le bouton lorsque survolé */
+.btn:hover {
+    -fx-background-color: #ddd;
+}
+
+/* Style pour le bouton lorsque pressé */
+.btn:pressed {
+    -fx-background-color: #b0b0b0;
+}
+
+
+
