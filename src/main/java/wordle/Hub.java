@@ -49,11 +49,11 @@ public class Hub extends Application{
         label.setFont(Font.font("Georgia", FontWeight.BOLD, 60));
         label.setTextFill(Color.BLACK);
 
-        Button wordleButton = new Button("Wordle");
+        Button wordleButton = new Button();
         Button jeu2Button = new Button("Prochainement...");
         Button jeu3Button = new Button("Prochainement...");
 
-        Image wordleImage = new Image("file:C:\\Users\\hchak\\IdeaProjects\\wordle/wordle.jpg");
+        Image wordleImage = new Image("file:wordle.png");
         BackgroundImage backgroundImage = new BackgroundImage(
                 wordleImage,
                 BackgroundRepeat.NO_REPEAT,
@@ -66,10 +66,10 @@ public class Hub extends Application{
         double imageHeight = wordleImage.getHeight();
 
         Background background = new Background(backgroundImage);
-        //wordleButton.setBackground(background);
+        wordleButton.setBackground(background);
 
-        //wordleButton.setMinSize(imageWidth, imageHeight);
-        //wordleButton.setMaxSize(imageWidth, imageHeight);
+        wordleButton.setMinSize(imageWidth, imageHeight);
+        wordleButton.setMaxSize(imageWidth, imageHeight);
         jeu2Button.setMinSize(imageWidth, imageHeight);
         jeu2Button.setMaxSize(imageWidth, imageHeight);
         jeu3Button.setMinSize(imageWidth, imageHeight);

@@ -2,6 +2,7 @@ package wordle;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Random;
 import java.util.Scanner;
@@ -14,6 +15,7 @@ import java.util.Scanner;
 public class Game {
 
     static int GAME_WON = 0;
+    static int SCORE = 0;
 
     public static void main(String[] args) {
         Parser parser = new Parser();
@@ -33,7 +35,7 @@ public class Game {
         String directory = "Game_Words_files/";
         String filePath = directory + "Words_with_" + nbLetter + "_letters.txt";
         String word = null;
-        String words[] = new String[2000];
+        String words[] = new String[1000];
         Random random = new Random();
         int index = 0;
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
@@ -88,8 +90,10 @@ public class Game {
         for (int i = 0; i < inputWord.length(); i++) {
             if (inputWord.charAt(i) == selectedWord.charAt(i)) {
                 status[i] = "Vert";// Correct
+                SCORE = SCORE + 10;
             } else if (selectedWord.contains(String.valueOf(inputWord.charAt(i)))) {
                 status[i] = "Jaune";// Wrong Place
+                SCORE = SCORE + 5;
             } else {
                 status[i] = "Rouge";// Incorrect
             }
@@ -108,23 +112,76 @@ public class Game {
      */
     public static int gameDifficulty() {
         if (GAME_WON == 0) {
-            return 3;// return the number of letter of the selected word
+            return 4;// return the number of letter of the selected word
         } else if (GAME_WON == 1) {
-            return 4;
-        } else if (GAME_WON == 2) {
             return 5;
-        } else if (GAME_WON == 3) {
+        } else if (GAME_WON == 2) {
             return 6;
-        } else if (GAME_WON == 4) {
+        } else if (GAME_WON == 3) {
             return 7;
-        } else {
+        } else if (GAME_WON == 4) {
             return 8;
+        } else {
+            return 9;
         }
     }
 
-    /**
-     * Runs the word guessing game.
-     */
+    public static void BestScore(int score) {
+        String filePath = "BestScores.txt";
+        String bestScoreList[] = new String[11];
+        int i = 0;
+        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                bestScoreList[i]=line;
+                i++;
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            Scanner scanner = new Scanner(System.in);
+
+            String line;
+            line= ""+ score;
+            bestScoreList[i]=line;
+            int j=0;
+            while(j<10) {
+                if(bestScoreList[j]!=null) {
+                    String subString1 = bestScoreList[i].trim();
+                    String subString2 = bestScoreList[j].trim();
+                    if(Integer.parseInt(subString1)>Integer.parseInt(subString2)) {
+                        String tmp=bestScoreList[j];
+                        bestScoreList[j]=bestScoreList[i];
+                        bestScoreList[i]=tmp;
+                    }
+                    j++;
+                }
+                else {
+                    break;
+                }
+            }
+            try (FileWriter writer = new FileWriter(filePath, false)) {
+                i=0;
+                while(i<10) {
+                    if(bestScoreList[i]!=null) {
+                        writer.write(bestScoreList[i]+"\n");
+                        i++;
+                    }
+                    else {
+                        break;
+                    }
+                }
+                writer.close();
+            }
+            //scanner1.close();//Problem to be solved, can cause bugs
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
 
 
 }

@@ -1,6 +1,41 @@
 /* Style pour la scène */
 .root {
-    -fx-background-color: #2B124C; /* Couleur de fond */
+    -fx-background-color: #226d68; /* Couleur de fond */
+}
+
+.gagner {
+    -fx-background-color: #1ab700; /* Couleur de fond */
+
+
+}
+
+.perdu {
+    -fx-background-color: #e51010; /* Couleur de fond */
+
+
+}
+
+.rejouer {
+    -fx-min-width: 200px;
+    -fx-max-width: 200px;
+    -fx-min-height: 60px;
+    -fx-max-height: 60px;
+    -fx-background-color: #000eb6;
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 20px;
+    -fx-background-radius: 10px;
+    -fx-border-color: #1f314f;
+    -fx-border-width: 1px;
+    -fx-cursor: hand;
+    -fx-border-radius: 10px;
+    -fx-background-insets: 1px;
+    -fx-effect: dropshadow(three-pass-box, rgba(20, 28, 82, 0.8), 0, 0, 3, 3);
+}
+.rejouer:hover {
+    -fx-background-color: #1373ea;
+}
+.rejouer:pressed {
+    -fx-background-color: #000eb6;
 }
 
 /* Style pour la boîte contenant les lettres */
@@ -20,9 +55,11 @@
     -fx-pref-width: 60px;
     -fx-pref-height: 60px;
     -fx-font-size: 20px;
-    -fx-text-alignment: center;
+    -fx-font-weight: bold;
+    -fx-text-alignment: center; /* Alignement horizontal du texte */
+    -fx-alignment: center; /* Alignement vertical et horizontal du contenu */
     -fx-text-fill: #000000;
-    -fx-background-color: #FFFFFF; /* Couleur de fond des champs de texte */
+    -fx-background-color: #ecf8f6; /* Couleur de fond des champs de texte */
     -fx-background-radius: 10px;
     -fx-border-color: #0b29d6; /* Couleur de la bordure des champs de texte */
     -fx-border-width: 2px;
@@ -31,6 +68,7 @@
     -fx-text-inner-color: transparent;
     -fx-display-caret: false;
 }
+
 
 .text .caret {
     -fx-stroke: white;
@@ -41,9 +79,11 @@
     -fx-pref-width: 60px;
     -fx-pref-height: 60px;
     -fx-font-size: 20px;
-    -fx-text-alignment: center;
+    -fx-font-weight: bold;
+    -fx-text-alignment: center; /* Alignement horizontal du texte */
+    -fx-alignment: center; /* Alignement vertical et horizontal du contenu */
     -fx-text-fill: #FFFFFF;
-    -fx-background-color: #544f4f; /* Couleur de fond des champs de texte */
+    -fx-background-color: #18534f; /* Couleur de fond des champs de texte */
     -fx-background-radius: 10px;
     -fx-border-color: #000000; /* Couleur de la bordure des champs de texte */
     -fx-border-width: 2px;
@@ -55,9 +95,11 @@
     -fx-pref-width: 60px;
     -fx-pref-height: 60px;
     -fx-font-size: 20px;
-    -fx-text-alignment: center;
+    -fx-font-weight: bold;
+    -fx-text-alignment: center; /* Alignement horizontal du texte */
+    -fx-alignment: center; /* Alignement vertical et horizontal du contenu */
     -fx-text-fill: #FFFFFF;
-    -fx-background-color: #3AFA05; /* Couleur de fond des champs de texte */
+    -fx-background-color: #32b711; /* Couleur de fond des champs de texte */
     -fx-background-radius: 10px;
     -fx-border-color: #000000; /* Couleur de la bordure des champs de texte */
     -fx-border-width: 2px;
@@ -69,9 +111,11 @@
     -fx-pref-width: 60px;
     -fx-pref-height: 60px;
     -fx-font-size: 20px;
-    -fx-text-alignment: center;
+    -fx-font-weight: bold;
+    -fx-text-alignment: center; /* Alignement horizontal du texte */
+    -fx-alignment: center; /* Alignement vertical et horizontal du contenu */
     -fx-text-fill: #FFFFFF;
-    -fx-background-color: #FA0505; /* Couleur de fond des champs de texte */
+    -fx-background-color: #ec0b0b; /* Couleur de fond des champs de texte */
     -fx-background-radius: 10px;
     -fx-border-color: #000000; /* Couleur de la bordure des champs de texte */
     -fx-border-width: 2px;
@@ -83,9 +127,11 @@
     -fx-pref-width: 60px;
     -fx-pref-height: 60px;
     -fx-font-size: 20px;
-    -fx-text-alignment: center;
+    -fx-font-weight: bold;
+    -fx-text-alignment: center; /* Alignement horizontal du texte */
+    -fx-alignment: center; /* Alignement vertical et horizontal du contenu */
     -fx-text-fill: #FFFFFF;
-    -fx-background-color: #FABD05; /* Couleur de fond des champs de texte */
+    -fx-background-color: #dea506; /* Couleur de fond des champs de texte */
     -fx-background-radius: 10px;
     -fx-border-color: #000000; /* Couleur de la bordure des champs de texte */
     -fx-border-width: 2px;
@@ -109,11 +155,28 @@
 /*style pour des bouton clavier numeric*/
 
 .clavier-virtuel-button {
-    -fx-min-width: 47px;
-    -fx-max-width: 47px;
+    -fx-min-width: 49px;
+    -fx-max-width: 49px;
     -fx-min-height: 60px;
     -fx-max-height: 60px;
-    -fx-background-color: #DFB6B2;
+    -fx-background-color: #d6955b;
+    -fx-text-fill: #333;
+    -fx-font-size: 20px;
+    -fx-background-radius: 10px;
+    -fx-border-color: #1f314f;
+    -fx-border-width: 1px;
+    -fx-cursor: hand;
+    -fx-border-radius: 10px;
+    -fx-background-insets: 1px;
+    -fx-effect: dropshadow(three-pass-box, rgba(20, 28, 82, 0.8), 0, 0, 3, 3);
+}
+
+.clavier-virtuel-button2 {
+    -fx-min-width: 100px;
+    -fx-max-width: 100px;
+    -fx-min-height: 60px;
+    -fx-max-height: 60px;
+    -fx-background-color: #d6955b;
     -fx-text-fill: #333;
     -fx-font-size: 20px;
     -fx-background-radius: 10px;
@@ -127,16 +190,27 @@
 
 /* Style pour le bouton lorsque survolé */
 .clavier-virtuel-button:hover {
-    -fx-background-color: #ddd;
+    -fx-background-color: #feeaa1;
 }
 
 /* Style pour le bouton lorsque pressé */
 .clavier-virtuel-button:pressed {
-    -fx-background-color: #b0b0b0;
+    -fx-background-color: #ecf8f6;
 }
 
+/* Style pour le bouton lorsque survolé */
+.clavier-virtuel-button2:hover {
+    -fx-background-color: #feeaa1;
+}
+
+/* Style pour le bouton lorsque pressé */
+.clavier-virtuel-button2:pressed {
+    -fx-background-color: #ecf8f6;
+}
+
+
 .btn {
-    -fx-background-color: yellow;
+    -fx-background-color: #faf13c;
     -fx-background-radius: 50; /* Pour rendre le bouton rond */
     -fx-min-width: 40px; /* Ajustez selon vos besoins */
     -fx-min-height: 40px; /* Ajustez selon vos besoins */
@@ -146,13 +220,16 @@
 
 /* Style pour le bouton lorsque survolé */
 .btn:hover {
-    -fx-background-color: #ddd;
+    -fx-background-color: #fac53c;
 }
 
 /* Style pour le bouton lorsque pressé */
 .btn:pressed {
-    -fx-background-color: #b0b0b0;
+    -fx-background-color: #faf13c;
 }
-
+.indice{
+    -fx-background-color: #faf13c; /* Couleur de fond */
+    -fx-background-radius: 10px;
+}
 
 
