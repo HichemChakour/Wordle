@@ -3,7 +3,8 @@ from gensim.models import KeyedVectors
 
 app = Flask(__name__)
 
-model_path = 'C:\Users\hchak\IdeaProjects\wordle\frWac_non_lem_no_postag_no_phrase_200_skip_cut100.txt'
+model_path = 'C:/Users/hchak/IdeaProjects/wordle/frWac_non_lem_no_postag_no_phrase_200_skip_cut100.txt'
+
 model = KeyedVectors.load_word2vec_format(model_path, binary=False)
 
 @app.route('/find_similar_word', methods=['GET'])

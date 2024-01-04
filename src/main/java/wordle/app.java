@@ -1,6 +1,8 @@
 package wordle;
 
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -17,7 +19,14 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.animation.TranslateTransition;
 import javafx.util.Duration;
-
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
+import javafx.util.Duration;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -36,12 +45,17 @@ public class app extends Application {
     private boolean resultat ; // Pour savoir si on a gagner ou perdu
     private boolean partie ; // Pour savoir si la partie est finie
     private Game jeu ; // Pour utiliser les méthodes de la classe Game
-    private String selectedWord ; // Le mot à trouver
+    public static String selectedWord ; // Le mot à trouver
     private boolean dernier; // Pour savoir si on est sur la dernière colonne
     private VBox box ; // Empile les éléments à l'écran avec le parent du nœud root
     private VBox Lbox ;
     private StackPane root ;
     long Time ;// Pour calculer le temps écoulé
+
+    private Label timerLabel;
+    private int seconds;
+    private Timeline timeline;
+
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -49,12 +63,16 @@ public class app extends Application {
         this.primaryStage = primaryStage;
         primaryStage.setTitle("NEW WORDLE"); // Titre de l'application
 
+
         primaryStage.setScene(createScene()); // Afficher la scène
         primaryStage.show(); // Afficher la fenêtre
         primaryStage.centerOnScreen(); // Mettre la fenêtre au centre
     }
 
     private Scene createScene() {
+
+        Image icon = new Image("file:wordle.png"); // Remplacez avec le chemin de votre icône
+        primaryStage.getIcons().add(icon);
 
         // Initialiser les variables de la partie
           currentRow = 0;
@@ -70,16 +88,66 @@ public class app extends Application {
           root = new StackPane();
           Time =System.currentTimeMillis();
 
+        primaryStage.setMinWidth(1000);
+        primaryStage.setMinHeight(800);
+
 
         // Créer la scène
         root.getStyleClass().add("root");
-        Scene scene = new Scene(root, 800, 700);
+        Scene scene = new Scene(root, 1000, 800);
         scene.getStylesheets().add("file:style.css");
 
 
         box.getStyleClass().add("vbox");
 
 
+        Image Iquestion = new Image("file:question.png");
+
+        ImageView questionView = new ImageView(Iquestion);
+
+        questionView.setFitHeight(30);
+        questionView.setFitWidth(30);
+
+
+
+        Button question = new Button("");
+        question.setGraphic(questionView);
+        question.getStyleClass().add("btn");
+        question.setOnAction(event -> {
+
+            StackPane root5 = new StackPane();
+            StackPane root4 = new StackPane();
+            root5.setMaxSize(500, 550);
+            Button ok = new Button("OK");
+            ok.getStyleClass().add("rejouer");
+            ok.setOnAction(event1 -> {
+                root.getChildren().remove(root4);
+                root.getChildren().remove(root5);
+            });
+            Label phrase = new Label("Comment jouer : \n"+"\n"+"Chaque partie, un mot est choisi aléatoirement. \n Vous devez le deviner en 6 essais.\n" + "\n" +
+                    "À chaque essai, les lettres du mot que \n vous avez proposé changeront de \n couleur en fonction d'à quel point \n vous êtes proche de le trouver. " );
+            Label phrase2 = new Label("Rouge : La lettre n'est pas dans le mot\n" +
+                    "Jaune : La lettre n'est pas à la bonne place\n" +
+                    "Vert : La lettre est dans le mot et à la bonne place\n");
+            root5.getChildren().add(phrase);
+
+
+            Image exemple = new Image("file:exemple.png");
+
+            ImageView exempleView = new ImageView(exemple);
+            VBox tout = new VBox(10);
+            tout.getChildren().add(phrase);
+            tout.getChildren().add(exempleView);
+            tout.getChildren().add(phrase2);
+            tout.getChildren().add(ok);
+            root5.getChildren().add(tout);
+            tout.setAlignment(Pos.CENTER);
+            root5.getStyleClass().add("question");
+            root.getChildren().add(root4);
+            root.getChildren().add(root5);
+
+
+        });
 
 
         Image Iindice = new Image("file:indice.png");
@@ -89,24 +157,73 @@ public class app extends Application {
         indiceView.setFitHeight(30);
         indiceView.setFitWidth(30);
 
-
-
         Button indice = new Button("");
         indice.setGraphic(indiceView);
         indice.getStyleClass().add("btn");
         indice.setOnAction(event -> {
             Game.SCORE = Game.SCORE - 150;
             StackPane root3 = new StackPane();
-            root3.setMaxSize(150, 60);
+            root3.setMaxSize(150, 45);
 
             root3.getStyleClass().add("indice");
-            Label indiceLabel = new Label("Indice");//
+            Verify.findWord();
+            Label indiceLabel = new Label(Verify.mot);//
             root3.getChildren().add(indiceLabel);
             root.getChildren().add(root3);
             StackPane.setAlignment(root3, Pos.TOP_LEFT);
             StackPane.setMargin(root3, new javafx.geometry.Insets(10, 10, 10, 10));
             root.getChildren().remove(indice);
+            StackPane.setMargin(question, new javafx.geometry.Insets(10, 10, 10, 170));
 
+        });
+
+
+
+
+
+        Image Irecommencer = new Image("file:recomencer.png");
+
+        ImageView recomencerView = new ImageView(Irecommencer);
+
+        recomencerView.setFitHeight(30);
+        recomencerView.setFitWidth(30);
+
+
+
+        Button recommencer = new Button("");
+        recommencer.setGraphic(recomencerView);
+        recommencer.getStyleClass().add("btn");
+        recommencer.setOnAction(event -> {
+            timeline.stop();
+            this.primaryStage.setScene(createScene());
+
+        });
+
+
+
+        Image Imenu = new Image("file:menu.png");
+        ImageView menuView = new ImageView(Imenu);
+
+        menuView.setFitHeight(30);
+        menuView.setFitWidth(30);
+
+        Button menu = new Button("");
+        menu.setGraphic(menuView);
+        menu.getStyleClass().add("btn");
+        menu.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent e) {
+
+                primaryStage.hide();
+                Hub wordle = new Hub();
+                try {
+                    wordle.start(new Stage());
+                } catch (Exception ex) {
+                    throw new RuntimeException(ex);
+                }
+
+            }
 
         });
 
@@ -114,6 +231,54 @@ public class app extends Application {
         Label titre = new Label("WORDLE");
         titre.getStyleClass().add("label");
         box.getChildren().add(titre);
+
+        //timer
+        HBox timerBox = new HBox(2);
+        timerBox.getStyleClass().add("hbox");
+        StackPane wins = new StackPane();
+        wins.getStyleClass().add("timer");
+        StackPane timer = new StackPane();
+        timer.getStyleClass().add("timer");
+        timerLabel = new Label("00:00");
+        seconds = 0;
+
+        timeline = new Timeline(new KeyFrame(Duration.seconds(1), e -> updateTimer()));
+
+        timeline.setCycleCount(Timeline.INDEFINITE);
+        timeline.play();
+
+
+
+
+
+        Image Itimer= new Image("file:temps.png");
+
+        ImageView timerView = new ImageView(Itimer);
+
+        timerView.setFitHeight(30);
+        timerView.setFitWidth(30);
+
+        Image IWin= new Image("file:gagne.png");
+
+        ImageView winView = new ImageView(IWin);
+
+        winView.setFitHeight(30);
+        winView.setFitWidth(30);
+
+
+        Label gameWonLabel = new Label(String.valueOf(Game.GAME_WON));
+        wins.getChildren().add(gameWonLabel);
+        wins.getChildren().add(winView);
+        timer.getChildren().add(timerLabel);
+        timer.getChildren().add(timerView);
+        timerBox.getChildren().add(timer);
+        timerBox.getChildren().add(wins);
+        timer.setAlignment(timerView, Pos.CENTER_LEFT);
+        timer.setAlignment(timerLabel, Pos.CENTER_RIGHT);
+        wins.setAlignment(winView, Pos.CENTER_LEFT);
+        wins.setAlignment(gameWonLabel, Pos.CENTER_RIGHT);
+        box.getChildren().add(timerBox);
+
 
         //appel de la fonction cases pour creer les cases de la grille
         cases();
@@ -127,14 +292,27 @@ public class app extends Application {
         ImageView fondView = new ImageView(fond);
         fondView.fitWidthProperty().bind(primaryStage.widthProperty());
         fondView.fitHeightProperty().bind(primaryStage.heightProperty());
-        root.getChildren().addAll(box,indice);
+
+        root.getChildren().addAll(box,indice,menu,recommencer,question);
         //positioner le bouton indice en haut a gauche
+        StackPane.setAlignment(question, Pos.TOP_LEFT);
+        StackPane.setAlignment(recommencer, Pos.TOP_RIGHT);
+        StackPane.setAlignment(menu, Pos.TOP_RIGHT);
         StackPane.setAlignment(indice, Pos.TOP_LEFT);
+        StackPane.setMargin(recommencer, new javafx.geometry.Insets(10, 60, 10, 10));
+        StackPane.setMargin(question, new javafx.geometry.Insets(10, 10, 10, 60));
+        StackPane.setMargin(menu, new javafx.geometry.Insets(10, 10, 10, 10));
         StackPane.setMargin(indice, new javafx.geometry.Insets(10, 10, 10, 10));
         return scene;
 
     }
+    private void updateTimer() {
+        seconds++;
 
+        int minutes = (seconds % 3600) / 60;
+        int secs = seconds % 60;
+        timerLabel.setText(String.format("%02d:%02d", minutes, secs));
+    }
 
     private void cases(){
 
@@ -178,7 +356,7 @@ public class app extends Application {
 
 
                                 } else{
-                                    System.out.println("perdu");
+
                                     lettre[currentRow][currentCol].setEditable(false);
                                     party_perdu();
 
@@ -193,6 +371,7 @@ public class app extends Application {
                     if (event.getCode() == KeyCode.BACK_SPACE & partie) {
                         moveFocusToPreviousTextField();
                     } else if (event.getCode().isLetterKey()) {
+
                         moveFocusToNextTextField();
                     }else if(event.getCode().isDigitKey()){
                         lettre[currentRow][currentCol].setText("");
@@ -210,6 +389,7 @@ public class app extends Application {
 
     }
     private void party_perdu(){
+        timeline.stop();
         Game.GAME_WON=0;
         StackPane root2 = new StackPane();
         StackPane root4 = new StackPane();
@@ -241,6 +421,7 @@ public class app extends Application {
     }
 
     private void party_gagne() {
+        timeline.stop();
         Game.GAME_WON++;
 
         //creer une petite interface pour afficher le resultat de la partie
@@ -304,27 +485,36 @@ public class app extends Application {
     }
 
     private void moveFocusToNextTextField() {
-        lettre[currentRow][currentCol].setEditable(false);
-        lettre[currentRow][currentCol].getStyleClass().add("text-field");
-        if (currentCol < nblettre -1) {
-            // Avancez au champ de texte suivant dans la même ligne
-            currentCol++;
-            lettre[currentRow][currentCol].requestFocus();
-            lettre[currentRow][currentCol].setEditable(true);
-            lettre[currentRow][currentCol].getStyleClass().remove("text-field");
-            lettre[currentRow][currentCol].getStyleClass().add("text");
-        }else if(currentCol==nblettre -1){
-            dernier=true;
+        if(lettre[currentRow][currentCol].getText().isEmpty()){}
+        else {
+
+            lettre[currentRow][currentCol].setEditable(false);
+            lettre[currentRow][currentCol].getStyleClass().add("text-field");
+            if (currentCol < nblettre-1 ) {
+                // Avancez au champ de texte suivant dans la même ligne
+                currentCol++;
+                lettre[currentRow][currentCol].requestFocus();
+                lettre[currentRow][currentCol].setEditable(true);
+                lettre[currentRow][currentCol].getStyleClass().remove("text-field");
+                lettre[currentRow][currentCol].getStyleClass().add("text");
+            }else if(currentCol==nblettre -1){
+
+                dernier=true;
+            }
         }
 
     }
 
     private void moveFocusToPreviousTextField() {
+
         lettre[currentRow][currentCol].setEditable(false);
         lettre[currentRow][currentCol].getStyleClass().add("text-field");
         if(dernier){
             dernier=false;
+
             lettre[currentRow][currentCol].getStyleClass().remove("text-field");
+            lettre[currentRow][currentCol].getStyleClass().add("text");
+
         } else if (currentCol > 0) {
             currentCol--;
         }
@@ -428,7 +618,7 @@ public class app extends Application {
 
 
                     } else{
-                        System.out.println("perdu");
+
                         lettre[currentRow][currentCol].setEditable(false);
                         party_perdu();
 
@@ -566,6 +756,8 @@ public class app extends Application {
         }
 
     }
+
+
 
 
     public static void main(String[] args) {

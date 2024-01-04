@@ -4,12 +4,14 @@
 }
 
 .gagner {
+    -fx-background-radius: 10px;
     -fx-background-color: #1ab700; /* Couleur de fond */
 
 
 }
 
 .perdu {
+    -fx-background-radius: 10px;
     -fx-background-color: #e51010; /* Couleur de fond */
 
 
@@ -229,7 +231,19 @@
 }
 .indice{
     -fx-background-color: #faf13c; /* Couleur de fond */
-    -fx-background-radius: 10px;
+    -fx-background-radius: 50px;
 }
 
+.question{
+    -fx-background-color: #faf13c; /* Couleur de fond */
+    -fx-background-radius: 10px;
+}
+.timer{
+    -fx-background-color: #feeaa1;
+    -fx-max-width: 100px;
+    -fx-max-height: 10px;
+    -fx-min-width: 85px;
+
+    -fx-background-radius: 10px;
+}
 
